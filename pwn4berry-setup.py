@@ -38,9 +38,9 @@ def do_install():
 		'Exploit development tools':['sudo apt-get -y install', 'bochs', 'qemu'],
 		'Exploit database':['wget', '''https://github.com/offensive-security/exploit-database/archive/master.zip'''],
 		'Ruby':['sudo apt-get -y install','ruby', 'rubygems'],
-		'Source code audit':['sudo apt-get -y install', 'splint']
-		'sqlmap download':['git clone', '''git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev'''],
-		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz wfuzz-dev'''], 
+		'Source code audit':['sudo apt-get -y install', 'splint'],
+		'sqlmap download':['git clone', '''https://github.com/sqlmapproject/sqlmap.git sqlmap-dev'''],
+		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz wfuzz-dev''']
 		#'Quake & rpi firmware':['git clone','''https://github.com/raspberrypi/linux''', '''https://github.com/raspberrypi/userland''', '''https://github.com/raspberrypi/quake3''']
 		}
 	
