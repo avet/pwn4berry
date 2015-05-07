@@ -61,7 +61,7 @@ def do_post_install():
 	exit_code = 0
 
 	#install wfuzz
-	do_install_pkg('python', '''./wfuzz-dev/setup.py install''')
+	#do_install_pkg('python', '''./wfuzz-dev/setup.py install''')
 
 	if exit_code == 0:
 		print '*** Post installation finished ***'	
