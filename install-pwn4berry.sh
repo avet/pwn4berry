@@ -12,6 +12,10 @@ echo "AVET INS toolkit for pentesters using Raspberry Pi Raspbian"
 echo "Lite version for non commercial use only. WiFi support has been removed"
 echo 
 if [ -f /etc/debian_version ] || [ user_name -ne "pi" ]; then
+	if [ -f ./install-base ]; then
+		rm -rf ./install-base
+	fi
+
 	echo " + Installing basic components"
 	sudo apt-get update
 	if [ $? -ne 0 ]; then
@@ -41,7 +45,7 @@ if [ -f /etc/debian_version ] || [ user_name -ne "pi" ]; then
 		exit
 	fi
 	echo " + Installing additional components"
-	python ./install-base/pwn4berry-setup.py
+	python ./install-base/pwn4berry-setup.py install
 	if [ $? -ne 0 ]; then
 		echo "Failed to run pwn4berry main installer."
 		exit
