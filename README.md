@@ -7,7 +7,7 @@ This is lite version of pwn4berry for non-commercial use only. Lite version is m
 
 # Requirements
  * Raspberry Pi 2 (Model A will not work - sorry)
- * MicroSD Card
+ * MicroSD Card (min 16gb)
 
 # Installation
 
