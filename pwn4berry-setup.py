@@ -26,17 +26,21 @@ def do_install_pkg(cmd, cmd_args):
 		print cmd, cmd_args
 		return False
 
-def di(cmd, arg):
-	print cmd, arg
-	return True
-
 def do_install():
 	pkgs = {'Basic build tools':['sudo apt-get -y install', 'zip', 'gcc', 'build-essential', 'libsdl1.2-dev'],
-		'Basic network tools':['sudo apt-get -y install', 'wget', 'nmap', 'netcat-openbsd', 'wireshark', 'stunnel4', 'tightvncserver', 'ssvnc', 'scanssh'],
+		'Basic network tools':['sudo apt-get -y install', 'wget', 'nmap', 'netcat-openbsd', 'wireshark', 'stunnel4', 'tightvncserver', 'ssvnc', 'scanssh', 'sslscan', 'hping3', 'fping', 'dnswalk', 'arping'],
+		'Additional network tools':['sudo apt-get -y install', 'dsniff', 'tcpreplay', 'ettercap-common', 'ettercap-text-only', 'yersinia'],
+		'More network sniffers':['sudo apt-get -y install', 'ngrep', 'p0f', 'tcpdump', 'tcpslice', 'ssldump'],
+		'Python bindings for libpcap':['sudo apt-get -y install', 'python-ncap'],
+		'Basic python bindings':['sudo apt-get -y install', 'python-rpi.gpio', 'python-ipaddr', 'python-impacket', 'python-paramiko', 'python-scapy'], 
+		'Additional python tools':['sudo apt-get -y install', 'python-setuptools', 'python-virtualenv', 'virtualenvwrapper', 'ipython', 'snimpy'], 
 		'Basic web app sec tools':['sudo apt-get -y install', 'nikto'],
 		'Exploit development tools':['sudo apt-get -y install', 'bochs', 'qemu'],
 		'Exploit database':['wget', '''https://github.com/offensive-security/exploit-database/archive/master.zip'''],
-		'Ruby':['sudo apt-get -y install','ruby', 'rubygems']
+		'Ruby':['sudo apt-get -y install','ruby', 'rubygems'],
+		'Source code audit':['sudo apt-get -y install', 'splint']
+		'sqlmap download':['git clone', '''git clone https://github.com/sqlmapproject/sqlmap.git sqlmap-dev'''],
+		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz wfuzz-dev'''], 
 		#'Quake & rpi firmware':['git clone','''https://github.com/raspberrypi/linux''', '''https://github.com/raspberrypi/userland''', '''https://github.com/raspberrypi/quake3''']
 		}
 	
@@ -53,6 +57,17 @@ def do_install():
 	print '*** Installation finished ***'
 	return 0	 
 
+def do_post_install():
+	exit_code = 0
+
+	#install wfuzz
+	do_install_pkg('python', '''./wfuzz-dev/setup.py install''')
+
+	if exit_code == 0:
+		print '*** Post installation finished ***'	
+	return exit_code
+
+
 def usage():
 	print 'Usage: python pwn4berry-setup.py [command]'
 
@@ -67,6 +82,8 @@ def main():
 				exit_code = do_install()
 			except IOError, e:
 				print 'IO Error:', e
+			if exit_code == 0:
+				exit_code = do_post_install()
 	sys.exit(exit_code)
 
 if __name__ == '__main__':
