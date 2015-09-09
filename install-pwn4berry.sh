@@ -50,7 +50,9 @@ if [ -f /etc/debian_version ] || [ user_name -ne "pi" ]; then
 		echo "Failed to run pwn4berry main installer."
 		exit
 	fi
+	echo " + Removing deb packages from cache"
+	sudo apt-get clean
 else
-	echo "Error: pwn4berry can be installed only on Raspbian system"
+	echo "Error: pwn4berry can be installed only on Raspbian system using default pi account"
 fi
 
