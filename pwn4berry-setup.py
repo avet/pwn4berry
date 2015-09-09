@@ -28,6 +28,7 @@ def do_install_pkg(cmd, cmd_args):
 
 def do_install():
 	pkgs = {'Basic build tools':['sudo apt-get -y install', 'zip', 'gcc', 'build-essential', 'libsdl1.2-dev'],
+		'Basic admin tools':['sudo apt-get -y install', 'htop', 'mc'],
 		'Basic network tools':['sudo apt-get -y install', 'wget', 'nmap', 'netcat-openbsd', 'wireshark', 'stunnel4', 'tightvncserver', 'ssvnc', 'scanssh', 'sslscan', 'hping3', 'fping', 'dnswalk', 'arping'],
 		'Additional network tools':['sudo apt-get -y install', 'dsniff', 'tcpreplay', 'ettercap-common', 'ettercap-text-only', 'yersinia'],
 		'More network sniffers':['sudo apt-get -y install', 'ngrep', 'p0f', 'tcpdump', 'tcpslice', 'ssldump'],
