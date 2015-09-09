@@ -6,16 +6,20 @@
 # For more details please visit us at: www.avet.com.pl
 # Latest version of this code can be downloaded at: https://github.com/avet/pwn4berry
 
-user_name =$(whoami)
-pwn_verfile = /etc/pwn4berry
-pwn_ver = "0.2b"
-pwn_installbase = ./install-base
+user_name=$(whoami)
+pwn_verfile=/etc/pwn4berry
+pwn_ver="0.2b"
+pwn_installbase=./install-base
 
 echo "pwn4berry version 0.2b (c) 2014 - 2015 AVET Information and Network Security Sp. z o.o. 2014"
 echo "AVET INS toolkit for pentesters using Raspberry Pi Raspbian"
 echo "Lite version for non commercial use only. WiFi support has been removed"
 echo
-if [ -f /etc/debian_version ] || [ $user_name -ne "pi" ]; then
+if [ -f /etc/debian_version ]; then
+	if [ $user_name != "pi" ]; then
+		echo "Installation must be run using pi account"
+		exit
+	fi
 	if [ -f $pwn_verfile ]; then
 		echo "This installation will update current pwn4berry version if  possible."
 	else
