@@ -37,15 +37,15 @@ def do_install():
 		'Additional python tools':['sudo apt-get -y install', 'python-setuptools', 'python-virtualenv', 'virtualenvwrapper', 'ipython', 'snimpy'], 
 		'Basic web app sec tools':['sudo apt-get -y install', 'nikto'],
 		'Exploit development tools':['sudo apt-get -y install', 'bochs', 'qemu'],
-		'Exploit database':['wget', '''https://github.com/offensive-security/exploit-database/archive/master.zip'''],
+		'Exploit database':['wget -P ./install-base', '''https://github.com/offensive-security/exploit-database/archive/master.zip'''],
 		'Ruby':['sudo apt-get -y install','ruby', 'rubygems'],
 		'Source code audit':['sudo apt-get -y install', 'splint'],
-		'sqlmap download':['git clone', '''https://github.com/sqlmapproject/sqlmap.git sqlmap-dev'''],
-		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz wfuzz-dev''']
+		'sqlmap download':['git clone', '''https://github.com/sqlmapproject/sqlmap.git ./install-base/sqlmap-dev'''],
+		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz ./install-base/wfuzz-dev''']
 		}
 	
-	if os.path.isfile('master.zip'):
-		os.remove('master.zip')
+	if os.path.isfile('./install-base/master.zip'):
+		os.remove('./install-base/master.zip')
 	
 	for pack in pkgs.keys():
 		print ' + Installing: %s' % pack
