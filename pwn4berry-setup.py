@@ -42,7 +42,6 @@ def do_install():
 		'Source code audit':['sudo apt-get -y install', 'splint'],
 		'sqlmap download':['git clone', '''https://github.com/sqlmapproject/sqlmap.git sqlmap-dev'''],
 		'wfuzz download':['git clone', '''https://github.com/xmendez/wfuzz wfuzz-dev''']
-		#'Quake & rpi firmware':['git clone','''https://github.com/raspberrypi/linux''', '''https://github.com/raspberrypi/userland''', '''https://github.com/raspberrypi/quake3''']
 		}
 	
 	if os.path.isfile('master.zip'):
@@ -68,9 +67,23 @@ def do_post_install():
 		print '*** Post installation finished ***'	
 	return exit_code
 
+def do_rpi_firmware():
+	pkgs = {'Quake & rpi firmware':['git clone','''https://github.com/raspberrypi/linux''', '''https://github.com/raspberrypi/userland''', '''https://github.com/raspberrypi/quake3''']}
+
+	for pack in pkgs.keys():
+        	print ' + Installing: %s' % pack
+                cmd = pkgs[pack][0]
+                for arg in pkgs[pack][1:]:
+                        if do_install_pkg(cmd, arg) is False:
+                                print >>sys.stderr,'* ERROR: Instalation failed *'
+                                return 2
+	print '** Firmware and Quake sources download done **'
+	return 0
+
 
 def usage():
 	print 'Usage: python pwn4berry-setup.py [command]'
+
 
 def main():
 	exit_code = 0
@@ -79,14 +92,18 @@ def main():
 		exit_code = 1
 	else:
 		if sys.argv[1].lower() == 'install':
-			try:
-				exit_code = do_install()
-			except IOError, e:
-				print 'IO Error:', e
+			exit_code = do_install()
 			if exit_code == 0:
 				exit_code = do_post_install()
+		elif sys.argv[1].lower() == 'firmware':
+			exit_code = do_rpi_firmware()
+
 	sys.exit(exit_code)
 
 if __name__ == '__main__':
-	main()
+	try:
+		main()
+	except IOError, e:
+		print 'IO Error:', e
+		sys.exit(1)
 
