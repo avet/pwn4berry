@@ -22,12 +22,10 @@ if [ -f /etc/debian_version ]; then
 	fi
 	if [ -f $pwn_verfile ]; then
 		echo "This installation will update current pwn4berry version if  possible."
-		sudo rm $pwn_verfile
-		rm -rf $pwn_installbase 
+	else
+		echo -n "pwn4berry version:"
+		echo $pwn_ver | sudo tee $pwn_verfile
 	fi
-		
-	echo -n "pwn4berry version:"
-	echo $pwn_ver | sudo tee $pwn_verfile
 
 	if [ -f $pwn_installbase ]; then
 		echo " - Deleting old installation base directory"
